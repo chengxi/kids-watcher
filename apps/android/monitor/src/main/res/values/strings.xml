@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Distinguishable from the parent app on a device that has both. -->
+    <string name="app_name">Kids Monitor (Room)</string>
+</resources>

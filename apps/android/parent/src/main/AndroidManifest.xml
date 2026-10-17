@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- Without this, setBypassDnd(true) on the monitor-lost channel is
+         silently ignored and the alert is muted by Do Not Disturb. The user
+         must still grant it in Settings; declaring it is necessary, not
+         sufficient. -->
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <!-- specialUse, NOT dataSync: dataSync is capped at 6h per 24h on Android
+         15+ and stops silently, which would kill alerts overnight.
+         Not connectedDevice either: on Android 17 that type additionally
+         requires one of BLUETOOTH_*/NFC/USB/CHANGE_WIFI_STATE, none of which
+         this app uses. specialUse is the type Android provides for a valid
+         case the other types do not cover, and it has no time limit.
+         See spec 3.4. -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+    <!-- Scanning the pairing QR. Without this declaration the runtime request
+         returns denied instantly with no dialog, which looks to the user like
+         the button does nothing. -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!-- Requested only when Talk to monitor is tapped; capture stops on leaving live view. -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-feature android:name="android.hardware.microphone" android:required="false" />
+    <!-- Android 17 gates local-network access behind a runtime permission for
+         apps targeting SDK 37+. This whole product talks to a hub on the home
+         LAN, so without this every connection silently times out. INTERNET is
+         not enough any more. -->
+    <uses-permission android:name="android.permission.ACCESS_LOCAL_NETWORK" />
+
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+
+    <application
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.KidsMonitor">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name=".service.AlertService"
+            android:exported="false"
+            android:foregroundServiceType="specialUse">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="Maintains a persistent connection to a self-hosted
+                    monitoring hub on the user's home network so that alerts about
+                    a child's room are delivered the moment they happen. There is
+                    no cloud push service involved, so the connection must be held
+                    by the app itself and cannot be time-limited." />
+        </service>
+    </application>
+</manifest>

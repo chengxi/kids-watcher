@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+      Compose draws all the UI, so this theme only has to hand off cleanly to
+      the first frame. Parenting off the framework theme keeps the Material
+      Components library out of the dependency graph entirely.
+    -->
+    <style name="Theme.KidsMonitor" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/white</item>
+    </style>
+</resources>

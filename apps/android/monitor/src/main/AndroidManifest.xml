@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- Android 17 gates LAN traffic for apps targeting SDK 37+. Without this,
+         connections to the hub TIME OUT rather than erroring, which looks
+         exactly like the hub being down. See docs/lessons-learned.md. -->
+    <uses-permission android:name="android.permission.ACCESS_LOCAL_NETWORK" />
+
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <!-- Scanning the pairing QR, and on-demand video in M4. -->
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <!-- camera + microphone, NOT dataSync (capped at 6h per 24h, stops
+         silently) and NOT connectedDevice (needs a Bluetooth/NFC/USB
+         permission this app does not have; it crashed the parent app on
+         Android 17). See spec 3.4. -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CAMERA" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE" />
+
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+    <uses-feature android:name="android.hardware.microphone" android:required="true" />
+
+    <application
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.KidsMonitorMonitor">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Deliberately NO BOOT_COMPLETED receiver: Android 15+ throws
+             ForegroundServiceStartNotAllowedException when a boot receiver
+             starts a camera or microphone foreground service (spec 3.2).
+             After a reboot a human taps Start; the parent side surfaces the
+             gap as MONITOR_LOST. -->
+        <service
+            android:name=".service.MonitorService"
+            android:exported="false"
+            android:foregroundServiceType="camera|microphone" />
+    </application>
+</manifest>

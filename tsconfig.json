@@ -1,0 +1,17 @@
+{
+  "files": [],
+  "references": [
+    {
+      "path": "./packages/protocol"
+    },
+    {
+      "path": "./services/hub"
+    },
+    {
+      "path": "./tools/fake-monitor"
+    },
+    {
+      "path": "./tools/fake-parent"
+    }
+  ]
+}

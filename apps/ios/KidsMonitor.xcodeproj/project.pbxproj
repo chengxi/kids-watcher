@@ -1,0 +1,848 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		01D2A8D0C185416FB3C834BD /* ParentStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82B8D0DD63894C80724D8239 /* ParentStoreTests.swift */; };
+		11CD48E747F6FC0741A603DE /* ParentMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C31590832AE67ED08D796B /* ParentMedia.swift */; };
+		1B1C21B79B4080AAB7D88344 /* AudioCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5ACEDEAF2F594104A32A0DA /* AudioCapture.swift */; };
+		3C2905782363016367F397B6 /* HubConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56F2F981738F88E27CE0038 /* HubConnection.swift */; };
+		443015E273EFDCBA7A94AAB4 /* ParentHardwareTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C58E429430023FCE6795EEC /* ParentHardwareTests.swift */; };
+		4D11D2EE5B6506109B0FC045 /* MediaLifecycleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC54EDC8CDFA607E710CE773 /* MediaLifecycleTests.swift */; };
+		4DD1F441E493979DE9754CE1 /* MonitorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B121B07E9CA433F4476F77B3 /* MonitorTests.swift */; };
+		5C6023BF0E5DB88CB941EEB9 /* CameraCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713DF0732129D327405E5C8F /* CameraCapture.swift */; };
+		685ACC3E319B9EACD887BA4B /* DeviceName.swift in Sources */ = {isa = PBXBuildFile; fileRef = B150BF2B1CDD1AA1C76BC167 /* DeviceName.swift */; };
+		6A9B054AED01764EBDD665BC /* ParentApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5196960C72C8ADABB6F21CA8 /* ParentApp.swift */; };
+		6C01BF4E53EB1ABF4604F079 /* AudioHardwareTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC997EE5CAD2ADFAFC3CB5A /* AudioHardwareTests.swift */; };
+		73A6CDBA03C38726BC4E92D7 /* HubConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56F2F981738F88E27CE0038 /* HubConnection.swift */; };
+		7ED8EF71CD151525EF677792 /* QRScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7921738E734D38C27005EC2D /* QRScanner.swift */; };
+		842202404BFB5EF0E9C5E4BE /* QRScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7921738E734D38C27005EC2D /* QRScanner.swift */; };
+		8616E02A29CA356B786138F7 /* MonitorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8038ECE41C49B9A6C0D78B04 /* MonitorModel.swift */; };
+		862884CF0DEDBCF358205EAF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA5018CBC9B24336A9FED4EB /* Assets.xcassets */; };
+		90BEE7B31C43B2DA0D972B7D /* ParentNoiseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7405BB07E6410F5EB5A5523 /* ParentNoiseView.swift */; };
+		9201B335549E30AE3AA8365F /* MonitorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5947785CA3D31A75857014A /* MonitorApp.swift */; };
+		972892A6293C8F6132705E5A /* ParentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC51F588575487117DC14E0 /* ParentModel.swift */; };
+		9BDD91A3582EC88E8F160C0D /* MonitorCore in Frameworks */ = {isa = PBXBuildFile; productRef = B0C08E3A994D270A5130C4D8 /* MonitorCore */; };
+		A723A2774C360EE304EB64D3 /* ParentStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A526687F1E7154527C75E7A /* ParentStore.swift */; };
+		AA8DECEC50C0238BEE94B50A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA5018CBC9B24336A9FED4EB /* Assets.xcassets */; };
+		BA3F8851DBA2752125C380BA /* ParentIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F249824D38230CFE4B773B /* ParentIntegrationTests.swift */; };
+		D39081EE3BB65D99E181FBAC /* ParentLive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8050C2B9CCDE60900C4A5247 /* ParentLive.swift */; };
+		DDD38651482DA6619C309304 /* HubIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E26D7205615C45B337FCA9 /* HubIntegrationTests.swift */; };
+		E643B4C0300D684FDD49BC85 /* AudioCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5ACEDEAF2F594104A32A0DA /* AudioCapture.swift */; };
+		E9C55C2D57775BC1EC45710C /* ParentAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F129C16C5110F02842F99D /* ParentAPI.swift */; };
+		EC815B074667B456ED885A75 /* MonitorIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246B9F5F3D619C62B4DB1BDF /* MonitorIO.swift */; };
+		EEE0BAA561C9CAB43F60E2CB /* DeviceName.swift in Sources */ = {isa = PBXBuildFile; fileRef = B150BF2B1CDD1AA1C76BC167 /* DeviceName.swift */; };
+		F503B91A44A31F721DCC72C7 /* ParentUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76635B07EC643FC32AEB3A9F /* ParentUITests.swift */; };
+		FD81FE3E70D4F0D8C94C6090 /* MonitorCore in Frameworks */ = {isa = PBXBuildFile; productRef = 6ADF134583BF232E4221498D /* MonitorCore */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3072A0CE88F455AA94EF1CDA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0BE44E56E454447CD1A3213 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 71E1EC74017FF4551EC27910;
+			remoteInfo = KidsMonitor;
+		};
+		DC816543ADD612194191D188 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0BE44E56E454447CD1A3213 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8F3A890D6E554A2EF75C3508;
+			remoteInfo = KidsParent;
+		};
+		F308B4426EAA622BDD750BA6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0BE44E56E454447CD1A3213 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8F3A890D6E554A2EF75C3508;
+			remoteInfo = KidsParent;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0FC51F588575487117DC14E0 /* ParentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentModel.swift; sourceTree = "<group>"; };
+		137F7DEEC776A16529B15EF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		23FE3623374A5C04F7120C12 /* ParentUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = ParentUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		246B9F5F3D619C62B4DB1BDF /* MonitorIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitorIO.swift; sourceTree = "<group>"; };
+		3918190F895E71978B90A112 /* ParentTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = ParentTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C58E429430023FCE6795EEC /* ParentHardwareTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentHardwareTests.swift; sourceTree = "<group>"; };
+		50F129C16C5110F02842F99D /* ParentAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentAPI.swift; sourceTree = "<group>"; };
+		5196960C72C8ADABB6F21CA8 /* ParentApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentApp.swift; sourceTree = "<group>"; };
+		6A526687F1E7154527C75E7A /* ParentStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentStore.swift; sourceTree = "<group>"; };
+		6EC997EE5CAD2ADFAFC3CB5A /* AudioHardwareTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioHardwareTests.swift; sourceTree = "<group>"; };
+		713DF0732129D327405E5C8F /* CameraCapture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraCapture.swift; sourceTree = "<group>"; };
+		76635B07EC643FC32AEB3A9F /* ParentUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentUITests.swift; sourceTree = "<group>"; };
+		76C31590832AE67ED08D796B /* ParentMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentMedia.swift; sourceTree = "<group>"; };
+		77E26D7205615C45B337FCA9 /* HubIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HubIntegrationTests.swift; sourceTree = "<group>"; };
+		77F249824D38230CFE4B773B /* ParentIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentIntegrationTests.swift; sourceTree = "<group>"; };
+		7921738E734D38C27005EC2D /* QRScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScanner.swift; sourceTree = "<group>"; };
+		8038ECE41C49B9A6C0D78B04 /* MonitorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitorModel.swift; sourceTree = "<group>"; };
+		8050C2B9CCDE60900C4A5247 /* ParentLive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentLive.swift; sourceTree = "<group>"; };
+		82B8D0DD63894C80724D8239 /* ParentStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentStoreTests.swift; sourceTree = "<group>"; };
+		83902A97C8A47A748E892969 /* ios */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ios; path = .; sourceTree = SOURCE_ROOT; };
+		9752040437884C90CC28CAA5 /* KidsMonitor.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = KidsMonitor.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A5ACEDEAF2F594104A32A0DA /* AudioCapture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioCapture.swift; sourceTree = "<group>"; };
+		B121B07E9CA433F4476F77B3 /* MonitorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitorTests.swift; sourceTree = "<group>"; };
+		B150BF2B1CDD1AA1C76BC167 /* DeviceName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceName.swift; sourceTree = "<group>"; };
+		B870C91C6F3BBD2F7124E8B6 /* MonitorTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = MonitorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C5947785CA3D31A75857014A /* MonitorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitorApp.swift; sourceTree = "<group>"; };
+		C7405BB07E6410F5EB5A5523 /* ParentNoiseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentNoiseView.swift; sourceTree = "<group>"; };
+		C894D9FAFAC2E13C6AA677A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		D8DAAE421F66686596E5CAA6 /* KidsParent.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = KidsParent.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F56F2F981738F88E27CE0038 /* HubConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HubConnection.swift; sourceTree = "<group>"; };
+		FA5018CBC9B24336A9FED4EB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FC54EDC8CDFA607E710CE773 /* MediaLifecycleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaLifecycleTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0B73A390771299D27D4DB6EF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FD81FE3E70D4F0D8C94C6090 /* MonitorCore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		334A637BD12C7D40B8B2B410 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9BDD91A3582EC88E8F160C0D /* MonitorCore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		004A55335198866444C10F50 = {
+			isa = PBXGroup;
+			children = (
+				DB14706191564C1806C9CD65 /* Monitor */,
+				3844761CCB908E4F7A353C01 /* MonitorTests */,
+				40CB627E6A53CA1450FC70E2 /* Packages */,
+				28404A9289FB7E61C775A846 /* Parent */,
+				F54F161B37319645EAEC43B2 /* ParentTests */,
+				F232F71B31B144160F05B874 /* ParentUITests */,
+				B65B0EA6DA796696CA652C05 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		28404A9289FB7E61C775A846 /* Parent */ = {
+			isa = PBXGroup;
+			children = (
+				C894D9FAFAC2E13C6AA677A0 /* Info.plist */,
+				50F129C16C5110F02842F99D /* ParentAPI.swift */,
+				5196960C72C8ADABB6F21CA8 /* ParentApp.swift */,
+				8050C2B9CCDE60900C4A5247 /* ParentLive.swift */,
+				76C31590832AE67ED08D796B /* ParentMedia.swift */,
+				0FC51F588575487117DC14E0 /* ParentModel.swift */,
+				C7405BB07E6410F5EB5A5523 /* ParentNoiseView.swift */,
+				6A526687F1E7154527C75E7A /* ParentStore.swift */,
+			);
+			path = Parent;
+			sourceTree = "<group>";
+		};
+		3844761CCB908E4F7A353C01 /* MonitorTests */ = {
+			isa = PBXGroup;
+			children = (
+				6EC997EE5CAD2ADFAFC3CB5A /* AudioHardwareTests.swift */,
+				77E26D7205615C45B337FCA9 /* HubIntegrationTests.swift */,
+				FC54EDC8CDFA607E710CE773 /* MediaLifecycleTests.swift */,
+				B121B07E9CA433F4476F77B3 /* MonitorTests.swift */,
+			);
+			path = MonitorTests;
+			sourceTree = "<group>";
+		};
+		40CB627E6A53CA1450FC70E2 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				83902A97C8A47A748E892969 /* ios */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
+		B65B0EA6DA796696CA652C05 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9752040437884C90CC28CAA5 /* KidsMonitor.app */,
+				D8DAAE421F66686596E5CAA6 /* KidsParent.app */,
+				B870C91C6F3BBD2F7124E8B6 /* MonitorTests.xctest */,
+				3918190F895E71978B90A112 /* ParentTests.xctest */,
+				23FE3623374A5C04F7120C12 /* ParentUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DB14706191564C1806C9CD65 /* Monitor */ = {
+			isa = PBXGroup;
+			children = (
+				FA5018CBC9B24336A9FED4EB /* Assets.xcassets */,
+				A5ACEDEAF2F594104A32A0DA /* AudioCapture.swift */,
+				713DF0732129D327405E5C8F /* CameraCapture.swift */,
+				B150BF2B1CDD1AA1C76BC167 /* DeviceName.swift */,
+				F56F2F981738F88E27CE0038 /* HubConnection.swift */,
+				137F7DEEC776A16529B15EF1 /* Info.plist */,
+				C5947785CA3D31A75857014A /* MonitorApp.swift */,
+				246B9F5F3D619C62B4DB1BDF /* MonitorIO.swift */,
+				8038ECE41C49B9A6C0D78B04 /* MonitorModel.swift */,
+				7921738E734D38C27005EC2D /* QRScanner.swift */,
+			);
+			path = Monitor;
+			sourceTree = "<group>";
+		};
+		F232F71B31B144160F05B874 /* ParentUITests */ = {
+			isa = PBXGroup;
+			children = (
+				76635B07EC643FC32AEB3A9F /* ParentUITests.swift */,
+			);
+			path = ParentUITests;
+			sourceTree = "<group>";
+		};
+		F54F161B37319645EAEC43B2 /* ParentTests */ = {
+			isa = PBXGroup;
+			children = (
+				3C58E429430023FCE6795EEC /* ParentHardwareTests.swift */,
+				77F249824D38230CFE4B773B /* ParentIntegrationTests.swift */,
+				82B8D0DD63894C80724D8239 /* ParentStoreTests.swift */,
+			);
+			path = ParentTests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		19F2E1FB5E8376B4AFB29933 /* MonitorTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 72D774025DFFA2A5A117A0BB /* Build configuration list for PBXNativeTarget "MonitorTests" */;
+			buildPhases = (
+				A912FC71D7BAF3CB1EC0E759 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7D764E5D480B1E64B283E66E /* PBXTargetDependency */,
+			);
+			name = MonitorTests;
+			packageProductDependencies = (
+			);
+			productName = MonitorTests;
+			productReference = B870C91C6F3BBD2F7124E8B6 /* MonitorTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		71E1EC74017FF4551EC27910 /* KidsMonitor */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 431C1BCB827F050F5F0A213D /* Build configuration list for PBXNativeTarget "KidsMonitor" */;
+			buildPhases = (
+				8E091E97067AD8129D9FC968 /* Sources */,
+				A106D975B380676D0F7BC716 /* Resources */,
+				334A637BD12C7D40B8B2B410 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KidsMonitor;
+			packageProductDependencies = (
+				B0C08E3A994D270A5130C4D8 /* MonitorCore */,
+			);
+			productName = KidsMonitor;
+			productReference = 9752040437884C90CC28CAA5 /* KidsMonitor.app */;
+			productType = "com.apple.product-type.application";
+		};
+		8D9BA644BEB084B056F44BF6 /* ParentTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EB7A0B9BEDB1F21860291D84 /* Build configuration list for PBXNativeTarget "ParentTests" */;
+			buildPhases = (
+				E7062180D17877B1D54A6C18 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				05F43778C10367519D3A7D06 /* PBXTargetDependency */,
+			);
+			name = ParentTests;
+			packageProductDependencies = (
+			);
+			productName = ParentTests;
+			productReference = 3918190F895E71978B90A112 /* ParentTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		8F3A890D6E554A2EF75C3508 /* KidsParent */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5B2261A67667881DABEFBC22 /* Build configuration list for PBXNativeTarget "KidsParent" */;
+			buildPhases = (
+				7E6BDB4B5E1AF95D547476F4 /* Sources */,
+				31BD26E549A0EACB3D73C0F9 /* Resources */,
+				0B73A390771299D27D4DB6EF /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KidsParent;
+			packageProductDependencies = (
+				6ADF134583BF232E4221498D /* MonitorCore */,
+			);
+			productName = KidsParent;
+			productReference = D8DAAE421F66686596E5CAA6 /* KidsParent.app */;
+			productType = "com.apple.product-type.application";
+		};
+		ABDED6C9341605D08A75B30F /* ParentUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 03412D599C91529431042A70 /* Build configuration list for PBXNativeTarget "ParentUITests" */;
+			buildPhases = (
+				B0787F872827D4D723D9C948 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6B627706E2D7C89DC2B6D932 /* PBXTargetDependency */,
+			);
+			name = ParentUITests;
+			packageProductDependencies = (
+			);
+			productName = ParentUITests;
+			productReference = 23FE3623374A5C04F7120C12 /* ParentUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D0BE44E56E454447CD1A3213 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					19F2E1FB5E8376B4AFB29933 = {
+						ProvisioningStyle = Automatic;
+					};
+					71E1EC74017FF4551EC27910 = {
+						ProvisioningStyle = Automatic;
+					};
+					8D9BA644BEB084B056F44BF6 = {
+						ProvisioningStyle = Automatic;
+					};
+					8F3A890D6E554A2EF75C3508 = {
+						ProvisioningStyle = Automatic;
+					};
+					ABDED6C9341605D08A75B30F = {
+						ProvisioningStyle = Automatic;
+						TestTargetID = 8F3A890D6E554A2EF75C3508;
+					};
+				};
+			};
+			buildConfigurationList = C1B94640AAD439F8E06E8A29 /* Build configuration list for PBXProject "KidsMonitor" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 004A55335198866444C10F50;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				2B17A324D6B4EC8159021140 /* XCLocalSwiftPackageReference "." */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = B65B0EA6DA796696CA652C05 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				71E1EC74017FF4551EC27910 /* KidsMonitor */,
+				8F3A890D6E554A2EF75C3508 /* KidsParent */,
+				19F2E1FB5E8376B4AFB29933 /* MonitorTests */,
+				8D9BA644BEB084B056F44BF6 /* ParentTests */,
+				ABDED6C9341605D08A75B30F /* ParentUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		31BD26E549A0EACB3D73C0F9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA8DECEC50C0238BEE94B50A /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A106D975B380676D0F7BC716 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				862884CF0DEDBCF358205EAF /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7E6BDB4B5E1AF95D547476F4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1B1C21B79B4080AAB7D88344 /* AudioCapture.swift in Sources */,
+				685ACC3E319B9EACD887BA4B /* DeviceName.swift in Sources */,
+				73A6CDBA03C38726BC4E92D7 /* HubConnection.swift in Sources */,
+				E9C55C2D57775BC1EC45710C /* ParentAPI.swift in Sources */,
+				6A9B054AED01764EBDD665BC /* ParentApp.swift in Sources */,
+				D39081EE3BB65D99E181FBAC /* ParentLive.swift in Sources */,
+				11CD48E747F6FC0741A603DE /* ParentMedia.swift in Sources */,
+				972892A6293C8F6132705E5A /* ParentModel.swift in Sources */,
+				90BEE7B31C43B2DA0D972B7D /* ParentNoiseView.swift in Sources */,
+				A723A2774C360EE304EB64D3 /* ParentStore.swift in Sources */,
+				7ED8EF71CD151525EF677792 /* QRScanner.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8E091E97067AD8129D9FC968 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E643B4C0300D684FDD49BC85 /* AudioCapture.swift in Sources */,
+				5C6023BF0E5DB88CB941EEB9 /* CameraCapture.swift in Sources */,
+				EEE0BAA561C9CAB43F60E2CB /* DeviceName.swift in Sources */,
+				3C2905782363016367F397B6 /* HubConnection.swift in Sources */,
+				9201B335549E30AE3AA8365F /* MonitorApp.swift in Sources */,
+				EC815B074667B456ED885A75 /* MonitorIO.swift in Sources */,
+				8616E02A29CA356B786138F7 /* MonitorModel.swift in Sources */,
+				842202404BFB5EF0E9C5E4BE /* QRScanner.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A912FC71D7BAF3CB1EC0E759 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6C01BF4E53EB1ABF4604F079 /* AudioHardwareTests.swift in Sources */,
+				DDD38651482DA6619C309304 /* HubIntegrationTests.swift in Sources */,
+				4D11D2EE5B6506109B0FC045 /* MediaLifecycleTests.swift in Sources */,
+				4DD1F441E493979DE9754CE1 /* MonitorTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B0787F872827D4D723D9C948 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F503B91A44A31F721DCC72C7 /* ParentUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E7062180D17877B1D54A6C18 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				443015E273EFDCBA7A94AAB4 /* ParentHardwareTests.swift in Sources */,
+				BA3F8851DBA2752125C380BA /* ParentIntegrationTests.swift in Sources */,
+				01D2A8D0C185416FB3C834BD /* ParentStoreTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		05F43778C10367519D3A7D06 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8F3A890D6E554A2EF75C3508 /* KidsParent */;
+			targetProxy = F308B4426EAA622BDD750BA6 /* PBXContainerItemProxy */;
+		};
+		6B627706E2D7C89DC2B6D932 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8F3A890D6E554A2EF75C3508 /* KidsParent */;
+			targetProxy = DC816543ADD612194191D188 /* PBXContainerItemProxy */;
+		};
+		7D764E5D480B1E64B283E66E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 71E1EC74017FF4551EC27910 /* KidsMonitor */;
+			targetProxy = 3072A0CE88F455AA94EF1CDA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		00266E5F5F00EB6F64539E0D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.kidsmonitor.ParentUITests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = KidsParent;
+			};
+			name = Debug;
+		};
+		14335E85B577705E1F00A6D9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		40A7A5A08C3F7CF719CEB4CB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.kidsmonitor.ParentTests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KidsParent.app/KidsParent";
+			};
+			name = Debug;
+		};
+		417CCCFA824D04D740F33CE9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Monitor/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kidsmonitor.monitor.ios;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5E60E888A944D90C7465024D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.kidsmonitor.MonitorTests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KidsMonitor.app/KidsMonitor";
+			};
+			name = Debug;
+		};
+		802E03EF8983CD32581A7576 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.kidsmonitor.ParentUITests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = KidsParent;
+			};
+			name = Release;
+		};
+		86A5878B669E235FC5AD3448 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Parent/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kidsmonitor.parent.ios;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8A439325D41D4EC35C7CC8A8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Monitor/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kidsmonitor.monitor.ios;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		9DC3FA6634C969392D1718FD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.kidsmonitor.MonitorTests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KidsMonitor.app/KidsMonitor";
+			};
+			name = Release;
+		};
+		AF84D4DA21D53DEEFEB89770 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		CDDBB7EB4F798F73713D606A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.kidsmonitor.ParentTests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KidsParent.app/KidsParent";
+			};
+			name = Release;
+		};
+		DDF26015BB1F11DB43955E37 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Parent/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kidsmonitor.parent.ios;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		03412D599C91529431042A70 /* Build configuration list for PBXNativeTarget "ParentUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				00266E5F5F00EB6F64539E0D /* Debug */,
+				802E03EF8983CD32581A7576 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		431C1BCB827F050F5F0A213D /* Build configuration list for PBXNativeTarget "KidsMonitor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				417CCCFA824D04D740F33CE9 /* Debug */,
+				8A439325D41D4EC35C7CC8A8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		5B2261A67667881DABEFBC22 /* Build configuration list for PBXNativeTarget "KidsParent" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				86A5878B669E235FC5AD3448 /* Debug */,
+				DDF26015BB1F11DB43955E37 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		72D774025DFFA2A5A117A0BB /* Build configuration list for PBXNativeTarget "MonitorTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5E60E888A944D90C7465024D /* Debug */,
+				9DC3FA6634C969392D1718FD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		C1B94640AAD439F8E06E8A29 /* Build configuration list for PBXProject "KidsMonitor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				14335E85B577705E1F00A6D9 /* Debug */,
+				AF84D4DA21D53DEEFEB89770 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		EB7A0B9BEDB1F21860291D84 /* Build configuration list for PBXNativeTarget "ParentTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				40A7A5A08C3F7CF719CEB4CB /* Debug */,
+				CDDBB7EB4F798F73713D606A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		2B17A324D6B4EC8159021140 /* XCLocalSwiftPackageReference "." */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = .;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6ADF134583BF232E4221498D /* MonitorCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = MonitorCore;
+		};
+		B0C08E3A994D270A5130C4D8 /* MonitorCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = MonitorCore;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = D0BE44E56E454447CD1A3213 /* Project object */;
+}

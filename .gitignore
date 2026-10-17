@@ -1,0 +1,53 @@
+# --- Secrets and key material: never commit any of this ---
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+*.jks
+*.keystore
+secrets/
+certs/
+hub-data/
+
+# --- Android / Gradle ---
+local.properties
+apps/android/local.properties
+.gradle/
+build/
+captures/
+.cxx/
+*.apk
+*.aab
+*.ap_
+*.dex
+
+# --- Node ---
+node_modules/
+.qr-tool/
+dist/
+*.tsbuildinfo
+npm-debug.log*
+pnpm-debug.log*
+
+# --- SQLite ---
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+
+# --- Agent / tool working directories: local state, never shared ---
+.superpowers/
+docs/superpowers/
+.claude/worktrees/
+.claude/settings.local.json
+plans/
+
+# --- Editors / OS ---
+.idea/
+*.iml
+.DS_Store
+.vscode/

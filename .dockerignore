@@ -1,0 +1,28 @@
+# Build context is the repository root (see deploy/docker-compose.yml), so this
+# file must live here. A .dockerignore next to the Dockerfile is silently
+# ignored -- Docker only reads <context>/.dockerignore or
+# <dockerfile-path>.dockerignore.
+
+# Installed and built artifacts: the image builds its own.
+node_modules
+dist
+
+# Stale incremental-build state. Leaving this in makes `tsc -b` believe a
+# project is already built, so it skips it and the .d.ts never appears --
+# which breaks the build of anything that imports it.
+*.tsbuildinfo
+
+# Runtime state and key material. None of this belongs in an image.
+hub-data
+.env
+*.pem
+*.key
+*.crt
+*.db
+*.db-journal
+
+# Not needed to build or run the hub.
+.git
+.github
+docs
+apps

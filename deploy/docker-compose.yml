@@ -1,0 +1,35 @@
+name: kids-monitor
+
+services:
+  hub:
+    build:
+      context: ..
+      dockerfile: services/hub/Dockerfile
+    image: kids-monitor-hub:latest
+    container_name: kids-monitor-hub
+    restart: unless-stopped
+    # Host networking lets the hub see the LAN directly, which matters for mDNS
+    # discovery later. On macOS, Docker has no host networking: use the ports
+    # mapping below instead.
+    # network_mode: host
+    ports:
+      # Published port is overridable because 8443 is a popular choice and will
+      # collide on any box already running something else. Set HUB_PUBLISHED_PORT
+      # in .env; the port inside the container never needs to change.
+      - "${HUB_PUBLISHED_PORT:-8443}:8443"
+    environment:
+      HUB_PORT: "8443"
+      HUB_DATA_DIR: /data
+      HUB_LOG_LEVEL: "${HUB_LOG_LEVEL:-info}"
+      HUB_EVENT_RETENTION_DAYS: "${HUB_EVENT_RETENTION_DAYS:-30}"
+      # The address a phone must dial. Inside a container neither of these can
+      # be detected: the interfaces are Docker's, and HUB_PORT is the port
+      # inside the container, not the one published on the host. Without them
+      # the pair command refuses rather than printing an unreachable QR.
+      HUB_PUBLIC_HOST: "${HUB_PUBLIC_HOST:-}"
+      HUB_PUBLIC_PORT: "${HUB_PUBLISHED_PORT:-8443}"
+    volumes:
+      - hub-data:/data
+
+volumes:
+  hub-data:
