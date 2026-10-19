@@ -54,5 +54,4 @@ plans/
 
 # --- Art and art processing tools ---
 art/
-raw/
 tools/generate_diagram.py

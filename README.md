@@ -24,10 +24,12 @@ to the authors of this project or to anyone else.
   because that is how noise is detected, but audio is only streamed to you
   while the live view is open.
 - **Talk back.** Send your voice to the monitoring phone's speaker.
-- **No recording.** The monitor measures sound in a reused buffer and discards
-  it; nothing is written to disk and alerts carry numbers — how loud, how long —
-  not sound. The one thing that is saved is a snapshot you take yourself during
-  live view, which goes to your own phone's gallery.
+
+## Screenshots
+
+| Parent Dashboard | Live Video Feed | Monitor App |
+| :---: | :---: | :---: |
+| <img src="raw/screenshot_parent_dashboard.png" alt="Parent Dashboard" width="260" /> | <img src="raw/screenshot_videofeed.png" alt="Live Video Feed" width="260" /> | <img src="raw/screenshot_monitor_app.png" alt="Monitor App" width="260" /> |
 
 ## What it doesn't do
 
@@ -120,10 +122,15 @@ Prefer to do it by hand, or want to know what the agent will do?
 
 ## Status
 
-Phase 1: LAN-only. The Android monitor and parent apps are verified on real
-hardware, including phones as old as a Pixel 3 on Android 12. The iPhone monitor
-app builds, installs, pairs, and streams to the Android parent; extended
-acceptance testing on it is still open. There is no iPhone parent app yet.
+Phase 1: LAN-only. Both the monitor and parent apps are implemented for Android
+and iOS:
+- **Android monitor and parent**: Verified on real hardware, including phones as
+  old as a Pixel 3 on Android 12.
+- **iOS monitor**: Builds, installs, pairs, and streams live video and audio to
+  parents.
+- **iOS parent**: Built as a separate SwiftUI app (`KidsParent`), verified on iPhone
+  and iPad with foreground LAN delivery, noise history charts, live view, and
+  talkback.
 
 [`docs/planning/roadmap.md`](docs/planning/roadmap.md) tracks what is done and
 what is next.
