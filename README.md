@@ -1,6 +1,6 @@
-# Kids Monitor
+# Kid Watcher
 
-Turn the old phones in your drawer into a baby monitor or a room camera.
+Turn the old phones in your drawer into a kid monitor or a room camera.
 
 An old **Android phone or iPhone** becomes the monitoring device: it listens in
 the room, raises an alert when it gets loud, and streams live video and audio to
@@ -12,33 +12,77 @@ cloud service, and no telemetry. Audio, video and alerts travel from the phone
 to a small server you run yourself and back to your own phone — nothing is sent
 to the authors of this project or to anyone else.
 
+![Local Network Architecture](docs/assets/architecture.png)
+
 ## What it does
 
 - **Noise monitoring.** The monitor measures the room continuously and raises
   an alert when sound stays above its threshold. It adapts to the room's own
-  background level, and keeps 24 hours of history you can scroll through. -
-  **Live video and audio, on demand.** Pull up the feed when you want it. The
+  background level, and keeps 24 hours of history you can scroll through.
+- **Live video and audio, on demand.** Pull up the feed when you want it. The
   camera runs only while you are watching. The microphone is always listening,
   because that is how noise is detected, but audio is only streamed to you
-  while the live view is open. - **Talk back.** Send your voice to the
-  monitoring phone's speaker. - **No recording.** The monitor measures sound in
-  a reused buffer and discards it; nothing is written to disk and alerts carry
-  numbers — how loud, how long — not sound. The one thing that is saved is a
-  snapshot you take yourself during live view, which goes to your own phone's
-  gallery.
+  while the live view is open.
+- **Talk back.** Send your voice to the monitoring phone's speaker.
+- **No recording.** The monitor measures sound in a reused buffer and discards
+  it; nothing is written to disk and alerts carry numbers — how loud, how long —
+  not sound. The one thing that is saved is a snapshot you take yourself during
+  live view, which goes to your own phone's gallery.
 
-## What you need
+## What it doesn't do
 
-- **An always-on Linux box on your home wifi** to run the hub: a Raspberry Pi 4
+- **No night vision.** There is no night vision because phones do not support night
+  vision. Standard smartphone cameras lack infrared sensors and IR illuminators,
+  so the room needs some ambient lighting (such as a nightlight or dim lamp) to
+  be visible in the dark.
+- **No access outside your local network.** This app does not work if your devices
+  leave your local network. Everything stays strictly local and is only available
+  via devices connected to the same Wi-Fi local network. There is no cloud relay,
+  no external server, and no remote access over the internet.
+
+## Prerequisites
+
+### 1. Hardware & network
+
+- **An always-on Linux box on your home Wi-Fi** to run the hub: a Raspberry Pi 4
   or newer, a container-capable NAS, a mini-PC, or an old laptop. It needs
-  Docker with the Compose plugin, and nothing else. This is the one piece you
-  cannot skip — the phones talk to each other through it, and it holds the
-  alert log.
-- **A phone to leave in the room.** Android, or an iPhone.
-- **Your everyday phone** for the parent app. Android for now.
+  Docker with the Compose plugin, and nothing else. This is the central relay
+  and trust anchor that coordinates the phones and holds the event history.
+- **A phone to leave in the room** (camera and microphone):
+  - **Android**: Android 12 (API 31) or newer.
+  - **iOS**: iPhone running iOS 16 or newer.
+- **Your everyday phone** for the parent app:
+  - **Android**: Android 10 (API 29) or newer.
+  - **iOS**: iPhone or iPad running iOS/iPadOS 16 or newer (foreground LAN monitoring).
+- **Home Wi-Fi network**: All devices must connect to the same local Wi-Fi router.
 
-Old hardware is the point: the monitor runs on phones several Android versions
-behind current.
+### 2. Device setup & accounts
+
+- **For Android (Monitor or Parent)**:
+  - **No developer account needed.** Sideloading development APKs is free and requires
+    no Google Play registration, account setup, or fees.
+  - **Enable Developer options**: Open *Settings > About phone* and tap *Build number*
+    7 times until developer options are unlocked.
+  - **Enable debugging**: In *Settings > System > Developer options*, turn on
+    **USB debugging** (or **Wireless debugging** on Android 11+).
+  - Apps are built and installed directly onto the device using standard `adb`
+    (Android Debug Bridge).
+
+- **For iOS (Monitor or Parent)**:
+  - **Mac with Xcode required**: iOS apps must be compiled on macOS using Xcode.
+  - **Apple Developer account required for signing**:
+    - An Apple ID is required to sign the app in Xcode (*Settings > Accounts*, then select
+      your team under *Signing & Capabilities*).
+    - **Free Apple ID (Personal Team)**: Builds and installs to a physical device at no
+      financial cost, but Apple expires free provisioning profiles after 7 days
+      (requiring the app to be re-signed and reinstalled).
+    - **Paid Apple Developer Program account** ($99/year): Provides 1-year certificates
+      suitable for uninterrupted, unattended monitor use.
+  - **Enable Developer Mode**: On the iPhone or iPad, go to *Settings > Privacy & Security >
+    Developer Mode*, turn it on, and restart the device when prompted. Then trust the
+    developer certificate under *Settings > General > VPN & Device Management*.
+  - **First-time connection**: Connect the iPhone to the Mac via USB cable once and tap
+    *Trust This Computer*; subsequent builds and test runs can work over Wi-Fi.
 
 ## Getting started
 

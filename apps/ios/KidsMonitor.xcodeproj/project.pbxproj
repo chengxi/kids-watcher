@@ -28,10 +28,10 @@
 		972892A6293C8F6132705E5A /* ParentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC51F588575487117DC14E0 /* ParentModel.swift */; };
 		9BDD91A3582EC88E8F160C0D /* MonitorCore in Frameworks */ = {isa = PBXBuildFile; productRef = B0C08E3A994D270A5130C4D8 /* MonitorCore */; };
 		A723A2774C360EE304EB64D3 /* ParentStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A526687F1E7154527C75E7A /* ParentStore.swift */; };
-		AA8DECEC50C0238BEE94B50A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA5018CBC9B24336A9FED4EB /* Assets.xcassets */; };
 		BA3F8851DBA2752125C380BA /* ParentIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F249824D38230CFE4B773B /* ParentIntegrationTests.swift */; };
 		D39081EE3BB65D99E181FBAC /* ParentLive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8050C2B9CCDE60900C4A5247 /* ParentLive.swift */; };
 		DDD38651482DA6619C309304 /* HubIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E26D7205615C45B337FCA9 /* HubIntegrationTests.swift */; };
+		E558CA05E61D3D67EF2036CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 043BB321F048BCEF70B6D7DD /* Assets.xcassets */; };
 		E643B4C0300D684FDD49BC85 /* AudioCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5ACEDEAF2F594104A32A0DA /* AudioCapture.swift */; };
 		E9C55C2D57775BC1EC45710C /* ParentAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F129C16C5110F02842F99D /* ParentAPI.swift */; };
 		EC815B074667B456ED885A75 /* MonitorIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246B9F5F3D619C62B4DB1BDF /* MonitorIO.swift */; };
@@ -65,6 +65,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		043BB321F048BCEF70B6D7DD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0FC51F588575487117DC14E0 /* ParentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentModel.swift; sourceTree = "<group>"; };
 		137F7DEEC776A16529B15EF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		23FE3623374A5C04F7120C12 /* ParentUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = ParentUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -135,6 +136,7 @@
 		28404A9289FB7E61C775A846 /* Parent */ = {
 			isa = PBXGroup;
 			children = (
+				043BB321F048BCEF70B6D7DD /* Assets.xcassets */,
 				C894D9FAFAC2E13C6AA677A0 /* Info.plist */,
 				50F129C16C5110F02842F99D /* ParentAPI.swift */,
 				5196960C72C8ADABB6F21CA8 /* ParentApp.swift */,
@@ -368,7 +370,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA8DECEC50C0238BEE94B50A /* Assets.xcassets in Resources */,
+				E558CA05E61D3D67EF2036CE /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

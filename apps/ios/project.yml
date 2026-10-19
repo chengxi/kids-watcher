@@ -35,7 +35,6 @@ targets:
       - Monitor/QRScanner.swift
       - Monitor/DeviceName.swift
       - Monitor/AudioCapture.swift
-      - Monitor/Assets.xcassets
     dependencies:
       - package: MonitorCore
     settings:
