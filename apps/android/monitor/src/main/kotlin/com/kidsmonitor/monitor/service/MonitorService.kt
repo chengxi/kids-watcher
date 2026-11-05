@@ -18,9 +18,12 @@ import android.util.Log
 import androidx.core.app.ServiceCompat
 import androidx.core.content.ContextCompat
 import com.kidsmonitor.monitor.audio.AudioLevel
+import com.kidsmonitor.monitor.audio.AudioRecordSource
 import com.kidsmonitor.monitor.audio.Calibrator
+import com.kidsmonitor.monitor.audio.CaptureSession
 import com.kidsmonitor.monitor.audio.NoiseDetector
 import com.kidsmonitor.monitor.audio.NoiseHistoryAccumulator
+import com.kidsmonitor.monitor.audio.PcmSource
 import com.kidsmonitor.monitor.store.MonitorName
 import com.kidsmonitor.monitor.stream.CameraJpegSource
 import com.kidsmonitor.monitor.stream.GravityOrientation
@@ -84,15 +87,18 @@ class MonitorService : Service() {
 
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
     private var socket: MonitorSocket? = null
-    private var talkReceiver: TalkReceiver? = null
+    internal var talkReceiver: TalkReceiver? = null
     private val cameraOwner = ServiceLifecycleOwner()
     private lateinit var orientation: GravityOrientation
 
     // Volatile: read by the capture loop on another thread.
-    @Volatile private var stream: StreamController? = null
+    @Volatile internal var stream: StreamController? = null
     private var captureJob: Job? = null
-    // Volatile: StreamController reads it from the socket's collector.
-    @Volatile private var record: AudioRecord? = null
+    @Volatile private var captureSession: CaptureSession? = null
+    private var captureFailureHandled = false
+    private var destroyed = false
+    internal var stopSelfAction: () -> Unit = { stopSelf() }
+    internal val audioCaptureAvailable: Boolean get() = captureSession?.isAvailable == true
 
     private var config: MonitorConfig = DEFAULT_MONITOR_CONFIG
     private var detector = NoiseDetector(DEFAULT_MONITOR_CONFIG)
@@ -139,9 +145,9 @@ class MonitorService : Service() {
                     override fun sendMedia(frame: MediaFrame): Boolean = hubSocket.sendMedia(frame)
                 },
                 sampleRate = SAMPLE_RATE,
-                // Set only once AudioRecord is recording; null when RECORD_AUDIO
+                // Set only once AudioRecord is recording; false when RECORD_AUDIO
                 // is denied or the mic is held elsewhere. Never advertise silence as sound.
-                audioAvailable = { record != null },
+                audioAvailable = { captureSession?.isAvailable == true },
                 onStreamingChanged = { watching ->
                     MonitorState.mutableWatching.value = watching
                     updateNotice()
@@ -239,6 +245,7 @@ class MonitorService : Service() {
             Log.w(TAG, "RECORD_AUDIO not granted; cannot listen")
             MonitorState.mutableListening.value = false
             updateNotice()
+            captureFailed()
             return
         }
 
@@ -247,44 +254,72 @@ class MonitorService : Service() {
         )
         if (minBuffer <= 0) {
             Log.w(TAG, "AudioRecord reports no usable buffer size: $minBuffer")
+            captureFailed()
             return
         }
+        val session = createCaptureSession(
+            sourceFactory = { captureSourceFactory(maxOf(minBuffer, WINDOW_SAMPLES * 2 * 4)) },
+            onPcm = { buffer, count ->
+                onWindow(AudioLevel.rmsDbfs(buffer, count), hubSocket, maxOf(1, count * 1000 / SAMPLE_RATE))
+                // The buffer is reused; StreamController must copy before retaining PCM.
+                stream?.onAudioWindow(buffer, count)
+            },
+        )
+        captureSession = session
+        captureJob = scope.launch { session.run() }
+    }
 
-        val started = runCatching {
-            @Suppress("MissingPermission")
-            val recorder = AudioRecord(
-                MediaRecorder.AudioSource.MIC,
-                SAMPLE_RATE,
-                AudioFormat.CHANNEL_IN_MONO,
-                AudioFormat.ENCODING_PCM_16BIT,
-                maxOf(minBuffer, WINDOW_SAMPLES * 2 * 4),
-            )
-            check(recorder.state == AudioRecord.STATE_INITIALIZED) { "AudioRecord did not initialise" }
-            recorder.startRecording()
-            recorder
-        }.onFailure {
-            // A revoked permission or a mic held by another app must show in the
-            // notification, not crash a service meant to run all night.
-            Log.w(TAG, "could not start capture", it)
-            MonitorState.mutableListening.value = false
-            updateNotice()
-        }.getOrNull() ?: return
+    private fun createCaptureSession(
+        sourceFactory: () -> PcmSource,
+        onPcm: (ShortArray, Int) -> Unit,
+        readDispatcher: kotlinx.coroutines.CoroutineDispatcher = Dispatchers.IO,
+        callbackDispatcher: kotlinx.coroutines.CoroutineDispatcher = Dispatchers.Main.immediate,
+    ): CaptureSession {
+        lateinit var session: CaptureSession
+        session = CaptureSession(
+            sourceFactory = sourceFactory,
+            bufferSize = WINDOW_SAMPLES,
+            readDispatcher = readDispatcher,
+            callbackDispatcher = callbackDispatcher,
+            onStarted = {
+                if (!destroyed && captureSession === session) {
+                    MonitorState.mutableListening.value = true
+                    publishThresholds()
+                    updateNotice()
+                    Log.i(TAG, "capture started at ${SAMPLE_RATE}Hz")
+                }
+            },
+            onWindow = { buffer, count ->
+                if (!destroyed && captureSession === session) onPcm(buffer, count)
+            },
+            onFailure = { if (captureSession === session) captureFailed() },
+        )
+        return session
+    }
 
-        record = started
-        MonitorState.mutableListening.value = true
-        publishThresholds()
+    /** Main-thread terminal failure path; also exposed narrowly for service tests. */
+    internal fun captureFailed() {
+        if (destroyed || captureFailureHandled) return
+        captureFailureHandled = true
+        captureSession = null // Invalidate stream availability before updating observers.
+        MonitorState.mutableListening.value = false
+        MonitorState.mutableCalibrating.value = false
+        Log.w(TAG, "microphone capture failed; stopping monitor")
         updateNotice()
-        Log.i(TAG, "capture started at ${SAMPLE_RATE}Hz")
+        socket?.disconnect()
+        stopSelfAction()
+    }
 
-        captureJob = scope.launch {
-            val buffer = ShortArray(WINDOW_SAMPLES)
-            while (isActive) {
-                val read = started.read(buffer, 0, buffer.size)
-                if (read <= 0) continue
-                onWindow(AudioLevel.rmsDbfs(buffer, read), hubSocket, maxOf(1, read * 1000 / SAMPLE_RATE))
-                stream?.onAudioWindow(buffer, read)
-            }
-        }
+    /** Drives the same session-to-service callback path with a fake PCM source. */
+    internal suspend fun runCaptureSessionForTest(source: PcmSource) {
+        val session = createCaptureSession(
+            sourceFactory = { source },
+            onPcm = { _, _ -> },
+            readDispatcher = Dispatchers.Unconfined,
+            callbackDispatcher = Dispatchers.Unconfined,
+        )
+        captureSession = session
+        session.run()
     }
 
     private fun onWindow(dbfs: Double, hubSocket: MonitorSocket, windowMs: Int = WINDOW_MS) {
@@ -416,6 +451,7 @@ class MonitorService : Service() {
     }.getOrDefault("unknown")
 
     override fun onDestroy() {
+        destroyed = true
         talkReceiver?.stop("Monitoring stopped")
         talkReceiver = null
         // Tell the hub the stream is over while the socket still exists, and
@@ -430,12 +466,9 @@ class MonitorService : Service() {
         orientation.stop()
         cameraOwner.destroy()
         MonitorState.mutableWatching.value = false
+        captureSession?.requestStop()
         captureJob?.cancel()
-        runCatching {
-            record?.stop()
-            record?.release()
-        }
-        record = null
+        captureSession = null
         socket?.disconnect()
         socket = null
         MonitorState.mutableListening.value = false
@@ -452,6 +485,23 @@ class MonitorService : Service() {
          * credential store throws when constructed in a JVM test.
          */
         internal var credentialsFactory: (Context) -> Credentials = { Credentials(it) }
+
+        /** Test seam for scripted PCM sources. */
+        internal var captureSourceFactory: (Int) -> PcmSource = { bufferBytes ->
+            @Suppress("MissingPermission")
+            val recorder = AudioRecord(
+                MediaRecorder.AudioSource.MIC,
+                SAMPLE_RATE,
+                AudioFormat.CHANNEL_IN_MONO,
+                AudioFormat.ENCODING_PCM_16BIT,
+                bufferBytes,
+            )
+            if (recorder.state != AudioRecord.STATE_INITIALIZED) {
+                runCatching { recorder.release() }
+                error("AudioRecord did not initialise")
+            }
+            AudioRecordSource(recorder)
+        }
 
         fun start(context: Context) {
             context.startForegroundService(Intent(context, MonitorService::class.java))
