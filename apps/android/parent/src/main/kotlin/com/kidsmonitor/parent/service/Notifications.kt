@@ -26,6 +26,9 @@ object Notifications {
     const val CHANNEL_MONITOR_ONLINE = "monitor_online"
     const val CHANNEL_SERVICE = "service"
     const val ONGOING_ID = 1
+    private const val EVENT_NOTIFICATION_ID = 0
+
+    private fun eventTag(eventId: Long): String = "kids-monitor:event:$eventId"
 
     /**
      * Whether Android will actually honour the monitor-lost channel's
@@ -173,7 +176,7 @@ object Notifications {
             manager.activeNotifications.filter {
                 it.notification.channelId == CHANNEL_MONITOR_LOST &&
                     it.notification.extras.getString("monitorId") == event.monitorId
-            }.forEach { manager.cancel(it.id) }
+            }.forEach { manager.cancel(it.tag, it.id) }
         }
         val notification = NotificationCompat.Builder(context, channelFor(event.type))
             .setSmallIcon(android.R.drawable.ic_dialog_alert)
@@ -189,8 +192,8 @@ object Notifications {
             .setSilent(event.type == EventType.MONITOR_ONLINE)
             .setPriority(if (event.type == EventType.MONITOR_ONLINE) NotificationCompat.PRIORITY_LOW else NotificationCompat.PRIORITY_HIGH)
             .build()
-        // Event id as the notification id: re-delivering the same event updates
-        // one notification rather than stacking duplicates.
-        manager.notify(event.id.toInt(), notification)
+        // The stable tag keeps the full Long event id without sharing the
+        // untagged namespace used by the foreground service notice.
+        manager.notify(eventTag(event.id), EVENT_NOTIFICATION_ID, notification)
     }
 }

@@ -58,6 +58,12 @@ has no read/unread or acknowledgement state.
 old phone in a closed room, and detection is audio-driven anyway. The camera
 spins up only when someone is watching.
 
+**Microphone capture failure stops monitoring.** A terminal recorder read or
+start failure closes capture and the monitor socket, then stops the foreground
+service. The user must tap **Start** to resume; the service does not retry
+capture automatically. The parent sees loss through the hub's normal liveness
+timeout.
+
 ## Repository layout
 
 ```

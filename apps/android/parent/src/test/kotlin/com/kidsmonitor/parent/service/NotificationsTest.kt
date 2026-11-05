@@ -6,6 +6,7 @@ import android.app.Notification
 import android.app.NotificationManager
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
+import androidx.core.app.NotificationCompat
 import com.kidsmonitor.parent.data.EventEntity
 import com.kidsmonitor.shared.protocol.EventType
 import org.junit.Assert.assertEquals
@@ -27,6 +28,10 @@ class NotificationsTest {
         id = 1, monitorId = "m1", type = type, tsMs = 1757000000000,
         peakDb = peakDb, durationMs = 2200,
     )
+
+    private fun eventIdentity(id: Long) = "kids-monitor:event:$id" to 0
+
+    private fun activeEvent(id: Long) = manager.activeNotifications.single { (it.tag to it.id) == eventIdentity(id) }
 
     @Before
     fun setUp() {
@@ -86,11 +91,11 @@ class NotificationsTest {
         for ((index, type) in EventType.entries.withIndex()) {
             val id = 100L + index
             Notifications.notifyEvent(context, event(type).copy(id = id), "Pixel 6")
-            val notification = manager.activeNotifications.first { it.id == id.toInt() }.notification
+            val notification = activeEvent(id).notification
             assertTrue(notification.extras.getCharSequence(Notification.EXTRA_TITLE).toString().contains("Pixel 6"))
         }
         Notifications.notifyEvent(context, event(EventType.LOUD_NOISE).copy(id = 200, monitorId = "m2"), "Pixel 3")
-        val other = manager.activeNotifications.first { it.id == 200 }.notification
+        val other = activeEvent(200).notification
         assertEquals("Noise in Pixel 3", other.extras.getCharSequence(Notification.EXTRA_TITLE).toString())
     }
 
@@ -139,18 +144,86 @@ class NotificationsTest {
         val n = Notifications.buildOngoing(context, connected = true)
         assertTrue(n.flags and Notification.FLAG_ONGOING_EVENT != 0)
     }
+
+    @Test
+    fun `event id one coexists with the ongoing notice across a status refresh`() {
+        manager.notify(Notifications.ONGOING_ID, Notifications.buildOngoing(context, connected = true))
+
+        Notifications.notifyEvent(context, event(EventType.LOUD_NOISE).copy(id = 1), "Nursery")
+
+        fun identities() = manager.activeNotifications.map { it.tag to it.id }.toSet()
+        val expected = setOf(null to Notifications.ONGOING_ID, eventIdentity(1))
+        val posted = manager.activeNotifications
+        assertEquals(expected, identities())
+        assertEquals(2, posted.size)
+        assertTrue(posted.any { it.notification.channelId == Notifications.CHANNEL_SERVICE })
+        assertTrue(posted.any { it.notification.channelId == Notifications.CHANNEL_ALERTS })
+
+        manager.notify(Notifications.ONGOING_ID, Notifications.buildOngoing(context, connected = false))
+
+        val refreshed = manager.activeNotifications
+        assertEquals(2, refreshed.size)
+        assertEquals(expected, identities())
+        assertTrue(refreshed.any { it.notification.channelId == Notifications.CHANNEL_SERVICE })
+        assertTrue(refreshed.any { it.notification.channelId == Notifications.CHANNEL_ALERTS })
+    }
+
     @Test
     fun `recovery is quiet and dismisses only that monitors offline notification`() {
         Notifications.notifyEvent(context, event(EventType.MONITOR_LOST).copy(id = 10), "Nursery")
         Notifications.notifyEvent(context, event(EventType.MONITOR_LOST).copy(id = 11, monitorId = "m2"), "Playroom")
-        Notifications.notifyEvent(context, event(EventType.MONITOR_ONLINE).copy(id = 12), "Nursery")
-        assertEquals(setOf(11, 12), manager.activeNotifications.map { it.id }.toSet())
-        val recovery = manager.activeNotifications.first { it.id == 12 }.notification
+        Notifications.notifyEvent(context, event(EventType.LOUD_NOISE).copy(id = 13), "Nursery")
+        manager.notify(Notifications.ONGOING_ID, Notifications.buildOngoing(context, connected = true))
+        val recoveryEvent = event(EventType.MONITOR_ONLINE).copy(id = 12)
+        Notifications.notifyEvent(context, recoveryEvent, "Nursery")
+        val expected = setOf(eventIdentity(11), eventIdentity(12), eventIdentity(13), null to Notifications.ONGOING_ID)
+        assertEquals(expected, manager.activeNotifications.map { it.tag to it.id }.toSet())
+        val recovery = activeEvent(12).notification
         assertEquals(Notifications.CHANNEL_MONITOR_ONLINE, recovery.channelId)
         assertEquals("Nursery is back online", recovery.extras.getCharSequence(Notification.EXTRA_TITLE).toString())
         assertEquals(NotificationManager.IMPORTANCE_LOW, manager.getNotificationChannel(recovery.channelId).importance)
         assertEquals(null, recovery.sound)
         assertEquals(null, recovery.vibrate)
+
+        Notifications.notifyEvent(context, recoveryEvent, "Nursery")
+        assertEquals(expected, manager.activeNotifications.map { it.tag to it.id }.toSet())
+    }
+
+    @Test
+    fun `redelivering an event updates one tagged notification and preserves the ongoing notice`() {
+        manager.notify(Notifications.ONGOING_ID, Notifications.buildOngoing(context, connected = true))
+        Notifications.notifyEvent(context, event(EventType.LOUD_NOISE).copy(id = 1), "Nursery")
+        Notifications.notifyEvent(context, event(EventType.LOUD_NOISE, peakDb = -3.2).copy(id = 1), "Nursery")
+
+        assertEquals(setOf(null to Notifications.ONGOING_ID, eventIdentity(1)), manager.activeNotifications.map { it.tag to it.id }.toSet())
+        assertEquals(2, manager.activeNotifications.size)
+        assertTrue(activeEvent(1).notification.extras.getCharSequence(Notification.EXTRA_TEXT).toString().contains("-3.2"))
+    }
+
+    @Test
+    fun `full Long event ids remain distinct when low 32 bits match`() {
+        manager.notify(Notifications.ONGOING_ID, Notifications.buildOngoing(context, connected = true))
+        Notifications.notifyEvent(context, event(EventType.LOUD_NOISE).copy(id = 1L), "Nursery")
+        Notifications.notifyEvent(context, event(EventType.MOTION).copy(id = 4294967297L), "Nursery")
+
+        assertEquals(setOf(null to Notifications.ONGOING_ID, eventIdentity(1L), eventIdentity(4294967297L)), manager.activeNotifications.map { it.tag to it.id }.toSet())
+        assertEquals(3, manager.activeNotifications.size)
+    }
+
+    @Test
+    fun `recovery clears a legacy untagged matching offline notice`() {
+        val legacyOffline = NotificationCompat.Builder(context, Notifications.CHANNEL_MONITOR_LOST)
+            .setSmallIcon(android.R.drawable.ic_dialog_alert)
+            .addExtras(android.os.Bundle().apply { putString("monitorId", "m1") })
+            .build()
+        manager.notify(10, legacyOffline)
+        Notifications.notifyEvent(context, event(EventType.MONITOR_LOST).copy(id = 11, monitorId = "m2"), "Playroom")
+        Notifications.notifyEvent(context, event(EventType.LOUD_NOISE).copy(id = 13, monitorId = "m1"), "Nursery")
+        manager.notify(Notifications.ONGOING_ID, Notifications.buildOngoing(context, connected = true))
+
+        Notifications.notifyEvent(context, event(EventType.MONITOR_ONLINE).copy(id = 12, monitorId = "m1"), "Nursery")
+
+        assertEquals(setOf(null to 1, eventIdentity(11), eventIdentity(12), eventIdentity(13)), manager.activeNotifications.map { it.tag to it.id }.toSet())
     }
 
 }
