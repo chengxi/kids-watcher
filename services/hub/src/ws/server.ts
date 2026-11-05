@@ -92,6 +92,11 @@ export function attachWs(
           if (lost !== null) fanOutEvent(registry, lost);
         }
       }
+      const previous = registry.get(device.id);
+      if (previous !== null && previous !== connection) {
+        retireConnection(registry, relay, previous);
+        previous.socket.close(4000, "replaced by a newer connection");
+      }
       registry.add(connection);
       deps.devices.touch(device.id, connection.lastSeenMs);
       if (device.role === "monitor") {
@@ -110,13 +115,7 @@ export function attachWs(
       // for one misbehaving device. The close handler below does the cleanup.
       ws.on("error", () => {});
       ws.on("close", () => {
-        if (registry.get(device.id)?.socket === ws) registry.remove(device.id);
-        // A viewer that walks out of wifi range must not leave the camera running.
-        // The watchdog terminates a silent socket, so a phone that simply
-        // vanished also ends up here rather than holding the camera for the
-        // minutes TCP takes to notice.
-        if (device.role === "parent") relay.dropViewer(device.id);
-        if (device.role === "monitor") relay.onStreamStopped(device.id, null, "monitor disconnected");
+        retireConnection(registry, relay, connection);
       });
       ws.on("message", (data, isBinary) => {
         handleMessage(deps, registry, relay, connection, data as Buffer, isBinary);
@@ -127,6 +126,19 @@ export function attachWs(
   return wss;
 }
 
+function retireConnection(registry: Registry, relay: Relay, connection: Connection): void {
+  const current = registry.get(connection.deviceId);
+  if (current !== connection || current.socket !== connection.socket) return;
+
+  // Keep the owner in the registry while relay cleanup sends its final control
+  // messages. The replacement is installed only after this session is retired.
+  if (connection.role === "parent") relay.dropViewer(connection.deviceId);
+  if (connection.role === "monitor") {
+    relay.onStreamStopped(connection.deviceId, null, "monitor disconnected");
+  }
+  if (registry.get(connection.deviceId) === connection) registry.remove(connection.deviceId);
+}
+
 function handleMessage(
   deps: HubDeps,
   registry: Registry,
@@ -135,6 +147,9 @@ function handleMessage(
   data: Buffer,
   isBinary: boolean,
 ): void {
+  if (registry.get(connection.deviceId) !== connection ||
+      registry.get(connection.deviceId)?.socket !== connection.socket) return;
+
   const nowMs = Date.now();
   connection.lastSeenMs = nowMs;
   deps.devices.touch(connection.deviceId, nowMs);
